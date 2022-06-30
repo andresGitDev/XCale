@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import com.xcale.models.Group;
 import com.xcale.models.Message;
+import com.xcale.models.User;
 import com.xcale.repositories.MessageRepository;
 
 /**
@@ -31,7 +33,9 @@ public class MessageServiceTest{
 	
 	@BeforeEach
 	public void setup(){
-		this.message = Message.builder().message("Hi").build();
+		User user = User.builder().id(1L).name("Nicolas").build();
+		Group group = Group.builder().id(1L).name("new Group").build();
+		this.message = Message.builder().user(user).group(group).message("Hi").build();
 	}
 	
 	@Test

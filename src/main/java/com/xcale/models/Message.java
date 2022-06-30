@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,12 +32,16 @@ public class Message {
 	@Id
     @GeneratedValue
 	private Long id;
-	private String message;
 	
+	@NotBlank(message = "Message is mandatory")
+	private String message;
+
+	@NotNull(message = "User can't be null")
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id", nullable=false)
     private User user;
-	
+
+	@NotNull(message = "Group can't be null")
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="group_id", nullable=false)
 	private Group group;
